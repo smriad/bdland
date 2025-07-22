@@ -32,27 +32,11 @@
     <button class="btn btn-primary w-100" onclick="convert()">Convert (রূপান্তর করুন)</button>
 
     <div id="result" class="mt-4 text-center"></div>
-   
-<div id="disqus_thread" style="margin-top: 50px;"></div>
-  <script>
-    var disqus_config = function () {
-      this.page.url = window.location.href;
-      this.page.identifier = window.location.pathname;
-    };
-    (function() {
-      var d = document, s = d.createElement('script');
-      s.src = 'https://bdland.disqus.com/embed.js'; // Replace this
-      s.setAttribute('data-timestamp', +new Date());
-      (d.head || d.body).appendChild(s);
-    })();
-  </script>
-  <noscript>অনুগ্রহ করে Disqus মন্তব্য দেখতে জাভাস্ক্রিপ্ট চালু করুন।</noscript>
-
-  <div id="visitorCount" style="margin-top:20px; font-weight:bold;text-align:center">
+    <div id="visitorCount" style="margin-top:20px; font-weight:bold;">
     <a href='http://www.freevisitorcounters.com'>Freevisitorcounters.com</a> <script type='text/javascript' src='https://www.freevisitorcounters.com/auth.php?id=a167f5871e47764b81c7913f32381b6fe8d692c6'></script>
 <script type="text/javascript" src="https://www.freevisitorcounters.com/en/home/counter/1368317/t/0"></script></div>
   </div>
-  
+
 
 
 <script>
