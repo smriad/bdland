@@ -178,26 +178,32 @@
       <a
         id="apk-download"
         href="/Land%20Converter.apk"
-        class="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg shadow-md"
+        class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg shadow-md mt-4"
       >
-        📥 Download Android App
+        📲 Download Android App (APK)
       </a>
 
+      <p id="env"></p>
       <script>
-        function isInWebView() {
-          const userAgent =
-            navigator.userAgent || navigator.vendor || window.opera;
+        document.getElementById("env").innerText =
+          "Standalone mode: " +
+          window.matchMedia("(display-mode: standalone)").matches;
+      </script>
+
+      <script>
+        function isStandalone() {
           return (
-            /wv/.test(userAgent) || // Android WebView
-            /(iPhone|iPod|iPad).*AppleWebKit(?!.*Safari)/i.test(userAgent)
+            window.matchMedia("(display-mode: standalone)").matches ||
+            window.navigator.standalone === true
           );
         }
 
         window.addEventListener("DOMContentLoaded", () => {
-          if (isInWebView()) {
-            document.getElementById("apk-download").style.display = "none";
+          const btn = document.getElementById("apk-download");
+          if (isStandalone()) {
+            btn.style.display = "none";
           } else {
-            document.getElementById("apk-download").style.display = "block";
+            btn.style.display = "inline-block";
           }
         });
       </script>
