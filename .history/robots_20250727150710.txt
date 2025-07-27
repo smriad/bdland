@@ -1,4 +1,0 @@
-User-agent: *
-Allow: /
-
-Sitemap: https://smriad.github.io/bdland/sitemap.xml
