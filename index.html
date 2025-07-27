@@ -174,21 +174,35 @@
       <noscript
         >অনুগ্রহ করে Disqus মন্তব্য দেখতে জাভাস্ক্রিপ্ট চালু করুন।</noscript
       >
+      <!-- Bootstrap CSS (add in <head> if not already included) -->
+      <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+      />
 
-      <a
-        id="apk-download"
-        href="/Land%20Converter.apk"
-        class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg shadow-md mt-4"
-      >
-        📲 Download Android App (APK)
-      </a>
-
-      <p id="env"></p>
-      <script>
-        document.getElementById("env").innerText =
-          "Standalone mode: " +
-          window.matchMedia("(display-mode: standalone)").matches;
-      </script>
+      <!-- Centered Red Download Button -->
+      <div class="d-flex justify-content-center my-4">
+        <a
+          id="apk-download"
+          href="/Land%20Converter.apk"
+          download
+          class="btn btn-danger btn-lg d-inline-flex align-items-center px-4 py-2"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="22"
+            height="22"
+            fill="currentColor"
+            class="bi bi-download me-2"
+            viewBox="0 0 16 16"
+          >
+            <path
+              d="M.5 9.9a.5.5 0 0 1 .5-.4H5V1.5a.5.5 0 0 1 1 0v8h4V1.5a.5.5 0 0 1 1 0v8h4a.5.5 0 0 1 .5.4.5.5 0 0 1-.2.6l-6 5a.5.5 0 0 1-.6 0l-6-5a.5.5 0 0 1-.2-.6z"
+            />
+          </svg>
+          Download for Android
+        </a>
+      </div>
 
       <script>
         function isStandalone() {
