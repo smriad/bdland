@@ -213,34 +213,32 @@
 <!-- PWA Detection & Button Toggle -->
 <style>
   #apk-download {
-    display: none;
-  }
+  display: inline-block; /* show by default */
+}
 
-  body:not(.standalone) #apk-download {
-    display: inline-block;
-  }
+/* When app is running standalone, hide the button */
+body.standalone #apk-download {
+  display: none;
+}
 </style>
 
 <script>
   function isInStandaloneMode() {
-    const isStandaloneMedia = window.matchMedia('(display-mode: standalone)').matches;
-    const isIOSStandalone = window.navigator.standalone === true;
-    const isTWA = document.referrer.startsWith('android-app://');
-    const isWebView = /wv/.test(navigator.userAgent.toLowerCase()) || /twa/.test(navigator.userAgent.toLowerCase());
-    return isStandaloneMedia || isIOSStandalone || isTWA || isWebView;
-  }
-
-  window.addEventListener('DOMContentLoaded', () => {
-    const btn = document.getElementById('apk-download');
-    if (!isInStandaloneMode()) {
-      btn.style.display = 'inline-block';
-    } else {
-      console.log('App is in standalone/PWA/Android WebView, hiding download button.');
-    }
-  });
-  if (!isInStandaloneMode()) {
-  document.body.classList.add('standalone');
+  const isStandaloneMedia = window.matchMedia('(display-mode: standalone)').matches;
+  const isIOSStandalone = window.navigator.standalone === true;
+  const isTWA = document.referrer.startsWith('android-app://');
+  const isWebView = /wv/.test(navigator.userAgent.toLowerCase()) || /twa/.test(navigator.userAgent.toLowerCase());
+  return isStandaloneMedia || isIOSStandalone || isTWA || isWebView;
 }
+
+window.addEventListener('DOMContentLoaded', () => {
+  if (isInStandaloneMode()) {
+    document.body.classList.add('standalone'); // Add standalone class **only if app is running as PWA**
+    console.log('App is in standalone mode, hiding download button.');
+  } else {
+    console.log('App is NOT in standalone mode, showing download button.');
+  }
+});
 </script>
 
 
