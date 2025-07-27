@@ -184,51 +184,56 @@
         rel="stylesheet"
       />
 
-      <!-- Centered Red Download Button -->
-      <div class="d-flex justify-content-center my-4">
-        <a
-          id="apk-download"
-          href="Land_Converter.apk"
-          download
-          class="btn btn-danger btn-lg d-inline-flex align-items-center px-4 py-2"
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="22"
-            height="22"
-            fill="currentColor"
-            class="bi bi-download me-2"
-            viewBox="0 0 16 16"
-          >
-            <path
-              d="M.5 9.9a.5.5 0 0 1 .5-.4H5V1.5a.5.5 0 0 1 1 0v8h4V1.5a.5.5 0 0 1 1 0v8h4a.5.5 0 0 1 .5.4.5.5 0 0 1-.2.6l-6 5a.5.5 0 0 1-.6 0l-6-5a.5.5 0 0 1-.2-.6z"
-            />
-          </svg>
-          Download for Android
-        </a>
-      </div>
+      <!-- APK Download Button -->
+<div class="d-flex justify-content-center my-4">
+  <a
+    id="apk-download"
+    href="Land_Converter.apk"
+    download
+    class="btn btn-danger btn-lg d-inline-flex align-items-center px-4 py-2"
+  >
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="22"
+      height="22"
+      fill="currentColor"
+      class="bi bi-download me-2"
+      viewBox="0 0 16 16"
+    >
+      <path
+        d="M.5 9.9a.5.5 0 0 1 .5-.4H5V1.5a.5.5 0 0 1 1 0v8h4V1.5a.5.5 0 0 1 1 0v8h4a.5.5 0 0 1 .5.4.5.5 0 0 1-.2.6l-6 5a.5.5 0 0 1-.6 0l-6-5a.5.5 0 0 1-.2-.6z"
+      />
+    </svg>
+    Download for Android
+  </a>
+</div>
 
-      <script>
-        function isStandalone() {
-          return (
-            window.matchMedia("(display-mode: standalone)").matches ||
-            window.navigator.standalone === true
-          );
-        }
+<!-- PWA Detection & Button Toggle -->
+<style>
+  #apk-download {
+    display: none;
+  }
+</style>
 
-        window.onload = () => {
-          const btn = document.getElementById("apk-download");
-          // Delay for 100ms to let display-mode settle
-          setTimeout(() => {
-            if (isStandalone()) {
-              btn.style.display = "none";
-            } else {
-              btn.style.display = "inline-block";
-            }
-          }, 100);
-        };
-      </script>
-    </div>
+<script>
+  function isInStandaloneMode() {
+    return (
+      window.matchMedia("(display-mode: standalone)").matches ||
+      window.navigator.standalone === true || // iOS
+      document.referrer.startsWith("android-app://") // Android TWA
+    );
+  }
+
+  window.addEventListener("load", () => {
+    const btn = document.getElementById("apk-download");
+    setTimeout(() => {
+      if (!isInStandaloneMode()) {
+        btn.style.display = "inline-block";
+      }
+    }, 200);
+  });
+</script>
+
 
     <!-- JS Script -->
     <script>
