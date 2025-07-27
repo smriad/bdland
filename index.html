@@ -1,38 +1,91 @@
-<!DOCTYPE html>
-<html lang="bn">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
   <title>বাংলাদেশ জমির একক রূপান্তর | Land Unit Converter for Bangladesh</title>
   
+  <!-- Essential Meta -->
   <meta name="description" content="বাংলাদেশের জমির একক যেমন কাঠা, শতক, বিঘা, কানী, ডেসিমেল, একর ইত্যাদি রূপান্তর করুন খুব সহজেই। Use our online tool to convert Paki, Bigha, Decimal, Katha, Kani, Gonda, Acre and more." />
   <meta name="keywords" content="জমির একক রূপান্তর, Land Converter Bangladesh, Paki to Decimal, Katha to Shotangsho, Acre to Bigha, Bengali land units, জমির হিসাব" />
-  <meta name="author" content="Riad" />
+  <meta name="author" content="SM Riad" />
   <meta name="robots" content="index, follow" />
   <link rel="canonical" href="https://smriad.github.io/bdland/" />
+
+  <!-- Favicon -->
+  <link rel="icon" href="favicon.ico" type="image/x-icon" />
+
+  <!-- Open Graph for social sharing -->
   <meta property="og:title" content="বাংলাদেশ জমির একক রূপান্তর | Land Converter Tool" />
   <meta property="og:description" content="বাংলাদেশের জমির একক খুব সহজে রূপান্তর করুন – কাঠা, শতক, বিঘা, কানী, একর ইত্যাদি।" />
+  <meta property="og:url" content="https://smriad.github.io/bdland/" />
   <meta property="og:type" content="website" />
+  <meta property="og:locale" content="bn_BD" />
+  <meta property="og:image" content="https://smriad.github.io/bdland/og-image.png" />
+
+  <!-- Twitter Cards -->
   <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="বাংলাদেশ জমির একক রূপান্তর" />
+  <meta name="twitter:description" content="বাংলাদেশের জমির একক রূপান্তর করুন খুব সহজে। কাঠা, শতক, বিঘা, কানী, একর ও আরও।" />
+  <meta name="twitter:image" content="https://smriad.github.io/bdland/og-image.png" />
+
+  <!-- Performance & Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css" />
+
+  <!-- Styles -->
   <style>
-    body { background: #f9f9f9; padding: 1rem; }
-    .container { max-width: 700px; margin: auto; background: white; padding: 2rem; border-radius: 8px; box-shadow: 0 0 12px rgba(0,0,0,0.1); }
+    body { 
+      background: #f9f9f9; 
+      padding: 1rem; 
+      font-family: 'Noto Sans Bengali', sans-serif;
+    }
+    .container { 
+      max-width: 700px; 
+      margin: auto; 
+      background: white; 
+      padding: 2rem; 
+      border-radius: 8px; 
+      box-shadow: 0 0 12px rgba(0,0,0,0.1); 
+    }
     h1 { margin-bottom: 1.5rem; }
     label { font-weight: 600; }
-    #result { margin-top: 1.5rem; font-size: 1.25rem; font-weight: 700; }
+    #result { 
+      margin-top: 1.5rem; 
+      font-size: 1.25rem; 
+      font-weight: 700; 
+    }
   </style>
 
-  <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-CRRLR1C8ME"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-CRRLR1C8ME"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-CRRLR1C8ME');
+  </script>
 
-  gtag('config', 'G-CRRLR1C8ME');
-</script>
+  <!-- Schema Markup -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "বাংলাদেশ জমির একক রূপান্তর",
+    "url": "https://smriad.github.io/bdland/",
+    "applicationCategory": "Utility",
+    "operatingSystem": "All",
+    "creator": {
+      "@type": "Person",
+      "name": "SM Riad"
+    },
+    "description": "বাংলাদেশের জমির একক যেমন কাঠা, শতক, বিঘা, কানী, একর ইত্যাদি রূপান্তর করুন খুব সহজেই।"
+  }
+  </script>
 </head>
+
 <body>
   <div class="container">
     <h1>Bangladesh Land Unit Converter <br/><small>(বাংলাদেশ জমির একক রূপান্তর)</small></h1>
@@ -104,22 +157,15 @@
     "decimal": "Decimal (ডেসিমেল)",
     "shotangsho": "Shotangsho (শতাংশ)",
     "katha": "Katha (কাঠা)",
-    "ojutangsho": "Ojutangsho (ওজুতাংশ)",
+    "ojutangsho": "Ojutangsho (অযুতাংশ)",
     "kani": "Kani (কানি)",
     "gonda": "Gonda (গণ্ডা)",
     "kora": "Kora (করা)",
-    "kranti": "Kranti (ক্রান্তি)",
     "til": "Til (তিল)",
     "acre": "Acre (একর)",
     "chain": "Chain (চেইন)",
     "square_meter": "Square Meter (বর্গ মিটার)",
-    "square_link": "Square Link (বর্গ লিঙ্ক)",
-    "bargo_hat": "Bargo Hat (বার্গো হাত)",
-    "chotak": "Chotak (চোতাক)",
-    "kak": "Kak (কাক)",
-    "donto": "Donto (দন্ত)",
-    "dhul": "Dhul (ধূল)",
-    "renu": "Renu (রেণু)",
+    
   };
 
   // Populate dropdowns
