@@ -175,18 +175,7 @@
         >অনুগ্রহ করে Disqus মন্তব্য দেখতে জাভাস্ক্রিপ্ট চালু করুন।</noscript
       >
 
-      <!-- Visitor Counter -->
-      <div class="text-center mt-4">
-        <script
-          type="text/javascript"
-          src="https://www.freevisitorcounters.com/auth.php?id=a167f5871e47764b81c7913f32381b6fe8d692c6"
-        ></script>
-        <script
-          type="text/javascript"
-          src="https://www.freevisitorcounters.com/en/home/counter/1368317/t/0"
-        ></script>
-      </div>
-      <div style="text-align:center; margin: 30px 0;">
+      <div id="apk-download" style="display: none; text-align:center; margin: 30px 0;">
         <a 
           href="Land Converter.apk" 
           download 
@@ -208,6 +197,24 @@
           📱 Download Land Converter APK
         </a>
       </div>
+      
+      <script>
+        // Simple check to avoid showing button in WebView or inside app
+        function isInAppWebView() {
+          const userAgent = navigator.userAgent || navigator.vendor || window.opera;
+          return (
+            userAgent.includes('wv') || // Android WebView
+            userAgent.includes('FBAN') || userAgent.includes('FBAV') || // Facebook
+            userAgent.includes('Instagram') || // Instagram
+            (window.navigator.standalone === true) // iOS standalone mode
+          );
+        }
+      
+        if (!isInAppWebView()) {
+          document.getElementById('apk-download').style.display = 'block';
+        }
+      </script>
+      
     </div>
 
     <!-- JS Script -->
