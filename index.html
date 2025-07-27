@@ -175,46 +175,32 @@
         >অনুগ্রহ করে Disqus মন্তব্য দেখতে জাভাস্ক্রিপ্ট চালু করুন।</noscript
       >
 
-      <div id="apk-download" style="display: none; text-align:center; margin: 30px 0;">
-        <a 
-          href="Land Converter.apk" 
-          download 
-          style="
-            display: inline-block;
-            background: #0d6efd;
-            color: white;
-            padding: 15px 30px;
-            font-size: 1.25rem;
-            font-weight: 600;
-            border-radius: 8px;
-            text-decoration: none;
-            box-shadow: 0 4px 8px rgba(13, 110, 253, 0.4);
-            transition: background-color 0.3s ease;
-          "
-          onmouseover="this.style.background='#0b5ed7'"
-          onmouseout="this.style.background='#0d6efd'"
-        >
-          📱 Download Land Converter APK
-        </a>
-      </div>
-      
+      <a
+        id="apk-download"
+        href="/Land%20Converter.apk"
+        class="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg shadow-md"
+      >
+        📥 Download Android App
+      </a>
+
       <script>
-        // Simple check to avoid showing button in WebView or inside app
-        function isInAppWebView() {
-          const userAgent = navigator.userAgent || navigator.vendor || window.opera;
+        function isInWebView() {
+          const userAgent =
+            navigator.userAgent || navigator.vendor || window.opera;
           return (
-            userAgent.includes('wv') || // Android WebView
-            userAgent.includes('FBAN') || userAgent.includes('FBAV') || // Facebook
-            userAgent.includes('Instagram') || // Instagram
-            (window.navigator.standalone === true) // iOS standalone mode
+            /wv/.test(userAgent) || // Android WebView
+            /(iPhone|iPod|iPad).*AppleWebKit(?!.*Safari)/i.test(userAgent)
           );
         }
-      
-        if (!isInAppWebView()) {
-          document.getElementById('apk-download').style.display = 'block';
-        }
+
+        window.addEventListener("DOMContentLoaded", () => {
+          if (isInWebView()) {
+            document.getElementById("apk-download").style.display = "none";
+          } else {
+            document.getElementById("apk-download").style.display = "block";
+          }
+        });
       </script>
-      
     </div>
 
     <!-- JS Script -->
