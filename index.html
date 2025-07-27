@@ -75,6 +75,10 @@
     />
 
     <style>
+      #apk-download {
+        display: none;
+      }
+
       body {
         background-color: #f8f9fa;
         font-family: "Noto Sans Bengali", sans-serif;
@@ -211,24 +215,18 @@
             window.navigator.standalone === true
           );
         }
-      </script>
 
-      <script>
-        function isStandalone() {
-          return (
-            window.matchMedia("(display-mode: standalone)").matches ||
-            window.navigator.standalone === true
-          );
-        }
-
-        window.addEventListener("DOMContentLoaded", () => {
+        window.onload = () => {
           const btn = document.getElementById("apk-download");
-          if (isStandalone()) {
-            btn.style.display = "none";
-          } else {
-            btn.style.display = "inline-block";
-          }
-        });
+          // Delay for 100ms to let display-mode settle
+          setTimeout(() => {
+            if (isStandalone()) {
+              btn.style.display = "none";
+            } else {
+              btn.style.display = "inline-block";
+            }
+          }, 100);
+        };
       </script>
     </div>
 
