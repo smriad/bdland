@@ -3,7 +3,7 @@
   "short_name": "Land Converter",
   "description": "বাংলাদেশের জমির একক রূপান্তর করুন খুব সহজে – কাঠা, শতক, বিঘা, কানী, একর ইত্যাদি।",
   "lang": "bn",
-  "start_url": "/bdland/",
+  "start_url": "./",
   "display": "standalone",
   "background_color": "#ffffff",
   "theme_color": "#0d6efd",
