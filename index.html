@@ -190,6 +190,9 @@
       gtag("config", "G-CRRLR1C8ME");
     </script>
   </head>
+  <!-- SweetAlert2 CDN -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
   <body>
     <div class="container bg-white p-4 shadow-sm rounded">
       <div class="row">
@@ -445,24 +448,8 @@
       let lastValue = 0;
       let lastUnit = null;
 
-      // Update wife alive/dead selectors dynamically
-      document.getElementById("wifeCount").addEventListener("input", () => {
-        const count = parseInt(document.getElementById("wifeCount").value) || 0;
-        const container = document.getElementById("wifeList");
-        container.innerHTML = "";
-        for (let i = 1; i <= count; i++) {
-          const div = document.createElement("div");
-          div.className = "mb-2";
-          div.innerHTML = `
-      <label>স্ত্রী ${i} বেঁচে আছেন?</label>
-      <select id="wifeAlive_${i}" class="form-select" style="max-width: 150px;">
-        <option value="yes">হ্যাঁ</option>
-        <option value="না">না</option>
-      </select>
-    `;
-          container.appendChild(div);
-        }
-      });
+
+      
 
       function convert() {
         const val = parseFloat(document.getElementById("inputValue").value);
@@ -489,6 +476,8 @@
         lastValue = converted;
         lastUnit = to;
       }
+
+      
 
       document.addEventListener("DOMContentLoaded", () => {
         const populateBtn = document.getElementById("populateWealth");
@@ -669,6 +658,25 @@
             });
         });
       }
+    </script>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const husbandInput = document.getElementById("husbandCount");
+        if (husbandInput) {
+          husbandInput.addEventListener("input", function () {
+            const val = parseInt(this.value || "0");
+            if (val > 1) {
+              this.value = 1;
+              Swal.fire({
+                icon: 'error',
+                title: 'ভুল ইনপুট!',
+                text: 'জীবিত স্বামীর সংখ্যা ১ এর বেশি হতে পারে না।',
+                confirmButtonText: 'ঠিক আছে'
+              });
+            }
+          });
+        }
+      });
     </script>
   </body>
 </html>
