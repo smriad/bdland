@@ -175,6 +175,20 @@
         margin-bottom: 0px;
       }
     </style>
+    <!-- Google tag (gtag.js) -->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-CRRLR1C8ME"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+
+      gtag("config", "G-CRRLR1C8ME");
+    </script>
   </head>
   <body>
     <div class="container bg-white p-4 shadow-sm rounded">
@@ -507,7 +521,6 @@
           parseInt(document.getElementById("daughters").value) || 0;
         const mother = document.getElementById("mother").value;
         const father = document.getElementById("father").value;
-
 
         const estateRaw = parseFloat(
           document.getElementById("estateValue").value
