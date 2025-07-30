@@ -1,5 +1,5 @@
 # বাংলাদেশ জমির একক রূপান্তর ও ওয়ারিশ হিসাব  
-**Bangladesh Land Unit Converter & Islamic Inheritance Calculator (Faraid - Hanafi Madhhab)**
+**Bangladesh Land Unit Converter & Islamic Inheritance Calculator**
 
 ---
 
