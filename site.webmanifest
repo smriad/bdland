@@ -41,6 +41,5 @@
     }
   ],
   "prefer_related_applications": true,
-  "permissions": ["notifications", "periodic-background-sync", "background-sync"],
   "iarc_rating_id": "eC-0000000000"
 }
