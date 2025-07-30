@@ -7,52 +7,29 @@
   "dir": "ltr",
   "start_url": "/bdland/",
   "scope": "/bdland/",
-  "scope_extensions": ["/bdland/"],
   "display": "standalone",
+  "orientation": "portrait-primary",
   "background_color": "#ffffff",
   "theme_color": "#0d6efd",
-  "orientation": "portrait-primary",
   "categories": ["utilities", "productivity", "tools", "islam"],
   "icons": [
     {
       "src": "android-chrome-192x192.png",
       "sizes": "192x192",
-      "type": "image/png",
-      "purpose": "any"
+      "type": "image/png"
     },
     {
       "src": "android-chrome-512x512.png",
       "sizes": "512x512",
-      "type": "image/png",
-      "purpose": "any"
+      "type": "image/png"
     },
     {
       "src": "apple-touch-icon.png",
       "sizes": "180x180",
-      "type": "image/png",
-      "purpose": "any"
+      "type": "image/png"
     }
   ],
-  "screenshots": [
-    {
-      "src": "screenshots/converter-light.png",
-      "sizes": "540x960",
-      "type": "image/png",
-      "label": "Land Unit Converter - Light Mode"
-    },
-    {
-      "src": "screenshots/converter-dark.png",
-      "sizes": "540x960",
-      "type": "image/png",
-      "label": "Land Unit Converter - Dark Mode"
-    },
-    {
-      "src": "screenshots/inheritance-calc.png",
-      "sizes": "540x960",
-      "type": "image/png",
-      "label": "Islamic Inheritance Calculator"
-    }
-  ],
+  
   "launch_handler": {
     "client_mode": "navigate-existing"
   },
@@ -64,5 +41,6 @@
     }
   ],
   "prefer_related_applications": true,
+  "permissions": ["notifications", "periodic-background-sync", "background-sync"],
   "iarc_rating_id": "eC-0000000000"
 }
