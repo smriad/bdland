@@ -7,7 +7,7 @@
 
 This web app helps users easily convert between various traditional Bangladeshi land measurement units such as কাঠা (Katha), শতক (Shotangsho), বিঘা (Bigha), কানী (Kani), একর (Acre), and others.
 
-Additionally, it includes an Islamic inheritance calculator based on **Faraid** (Islamic inheritance laws) following the **Hanafi Madhhab**, allowing users to calculate shares for heirs according to Islamic Shariah.
+Additionally, it includes an Islamic inheritance calculator based on Islamic Shariah.
 
 ---
 

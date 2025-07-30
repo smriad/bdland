@@ -2,16 +2,17 @@
   "id": "/bdland/",
   "name": "বাংলাদেশ জমির একক রূপান্তর",
   "short_name": "Land Converter",
-  "description": "বাংলাদেশের জমির একক রূপান্তর করুন খুব সহজে – কাঠা, শতক, বিঘা, কানী, একর ইত্যাদি।",
+  "description": "বাংলাদেশের জমির একক রূপান্তর করুন খুব সহজে – কাঠা, শতক, বিঘা, কানী, একর ইত্যাদি। ইসলামী শরিয়াহ অনুযায়ী ওয়ারিশ হিসাব।",
   "lang": "bn",
   "dir": "ltr",
   "start_url": "/bdland/",
   "scope": "/bdland/",
+  "scope_extensions": ["/bdland/"],
   "display": "standalone",
   "background_color": "#ffffff",
   "theme_color": "#0d6efd",
   "orientation": "portrait-primary",
-  "categories": ["utilities", "productivity"],
+  "categories": ["utilities", "productivity", "tools", "islam"],
   "icons": [
     {
       "src": "android-chrome-192x192.png",
@@ -32,17 +33,25 @@
       "purpose": "any"
     }
   ],
-  "launch_handler": {
-    "client_mode": "navigate-existing"
-  },
-  "related_applications": [
+  "screenshots": [
     {
-      "platform": "play",
-      "url": "https://play.google.com/store/apps/details?id=com.smriad.bdland",
-      "id": "com.smriad.bdland"
+      "src": "screenshots/converter-light.png",
+      "sizes": "540x960",
+      "type": "image/png",
+      "label": "Land Unit Converter - Light Mode"
+    },
+    {
+      "src": "screenshots/converter-dark.png",
+      "sizes": "540x960",
+      "type": "image/png",
+      "label": "Land Unit Converter - Dark Mode"
+    },
+    {
+      "src": "screenshots/inheritance-calc.png",
+      "sizes": "540x960",
+      "type": "image/png",
+      "label": "Islamic Inheritance Calculator"
     }
   ],
-  "prefer_related_applications": true,
-  "scope_extensions": ["/extra-path/"],
-  "iarc_rating_id": "your-rating-id-if-any"
-}
+  "launch_handler": {
+    "cli
