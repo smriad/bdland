@@ -189,9 +189,10 @@
 
       gtag("config", "G-CRRLR1C8ME");
     </script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
   </head>
   <!-- SweetAlert2 CDN -->
-  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
   <body>
     <div class="container bg-white p-4 shadow-sm rounded">
@@ -428,6 +429,8 @@
           estateUnit.appendChild(new Option(unitNames[key], key));
         }
         estateUnit.appendChild(new Option("Taka (টাকা)", "taka"));
+        estateUnit.appendChild(new Option("Vori (ভরি)", "vori"));
+
         estateUnit.value = "shotangsho"; // default value
       };
 
@@ -524,7 +527,7 @@
 
         // Convert estate to base unit (e.g., sqft equivalent)
         let estate =
-          estateUnitValue === "taka"
+          estateUnitValue === "taka" || estateUnitValue === "vori"
             ? estateRaw
             : estateRaw * units[estateUnitValue];
 
@@ -659,41 +662,97 @@
         // Format shares to selected unit
         const selectedUnit = estateUnitValue;
         function formatShare(val) {
-          if (selectedUnit === "taka") {
+          if (selectedUnit === "taka" || selectedUnit === "vori") {
             return val.toFixed(2);
           } else {
             return (val / units[selectedUnit]).toFixed(4);
           }
         }
         const unitLabel =
-          selectedUnit === "taka" ? "টাকা" : unitNames[selectedUnit];
+  selectedUnit === "taka" || selectedUnit === "vori"
+    ? selectedUnit === "taka" ? "টাকা" : "ভরি"
+    : unitNames[selectedUnit];
 
-        // Build output
+
         let output = `<h3 style="text-align:center;">ওয়ারিশ বণ্টন:</h3><ul>`;
+        const chartCategories = [];
+        const chartValues = [];
         for (const heir in shares) {
+          const shareValue = shares[heir];
+
           if (heir === "ছেলে" && sons > 1) {
-            const perSon = shares[heir] / sons;
+            const perSon = shareValue / sons;
             for (let i = 1; i <= sons; i++) {
-              output += `<li>ছেলে ${i}: ${formatShare(
-                perSon
-              )} ${unitLabel}</li>`;
+              const label = `ছেলে ${i}`;
+              const percent = parseFloat(formatShare(perSon));
+              output += `<li>${label}: ${percent.toFixed(4)} ${unitLabel}</li>`;
+              chartCategories.push(label);
+              chartValues.push(percent);
             }
           } else if (heir === "মেয়ে" && daughters > 1) {
-            const perDaughter = shares[heir] / daughters;
+            const perDaughter = shareValue / daughters;
             for (let i = 1; i <= daughters; i++) {
-              output += `<li>মেয়ে ${i}: ${formatShare(
-                perDaughter
-              )} ${unitLabel}</li>`;
+              const label = `মেয়ে ${i}`;
+              const percent = parseFloat(formatShare(perDaughter));
+              output += `<li>${label}: ${percent.toFixed(4)} ${unitLabel}</li>`;
+              chartCategories.push(label);
+              chartValues.push(percent);
             }
           } else {
-            output += `<li>${heir}: ${formatShare(
-              shares[heir]
-            )} ${unitLabel}</li>`;
+            const percent = parseFloat(formatShare(shareValue));
+            output += `<li>${heir}: ${percent.toFixed(4)} ${unitLabel}</li>`;
+            chartCategories.push(heir);
+            chartValues.push(percent);
           }
         }
+
         output += "</ul>";
 
+        console.log(chartValues);
+        output +=
+          '<div id="inheritanceBarChart" style="max-width: 600px; margin: 0 auto;"></div>';
+
         document.getElementById("inheritance-result").innerHTML = output;
+
+        // Render Apex Chart
+        const options = {
+          chart: {
+            type: "bar",
+            height: 350,
+          },
+          series: [
+            {
+              name: "সম্পত্তির পরিমাণ",
+              data: chartValues,
+            },
+          ],
+          xaxis: {
+            categories: chartCategories,
+            labels: {
+              style: {
+                fontFamily: "Noto Sans Bengali",
+              },
+            },
+          },
+          title: {
+            text: "",
+            align: "center",
+            style: {
+              fontFamily: "Noto Sans Bengali",
+            },
+          },
+          dataLabels: {
+            enabled: true,
+          },
+        };
+
+        const chart = new ApexCharts(
+          document.querySelector("#inheritanceBarChart"),
+          options
+        );
+        chart.render();
+
+        //document.getElementById("inheritance-result").innerHTML = output;
       }
 
       function isInStandaloneMode() {
