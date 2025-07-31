@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>
       বাংলাদেশ জমির একক রূপান্তর ও ওয়ারিশ হিসাব | Bangladesh Land Area Unit
-      Converter & Islamic Inheritance (Faraid)
+      Converter & Islamic Inheritance Calculator
     </title>
 
     <meta
@@ -191,7 +191,7 @@
     </script>
   </head>
   <!-- SweetAlert2 CDN -->
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
   <body>
     <div class="container bg-white p-4 shadow-sm rounded">
@@ -448,9 +448,6 @@
       let lastValue = 0;
       let lastUnit = null;
 
-
-      
-
       function convert() {
         const val = parseFloat(document.getElementById("inputValue").value);
         const from = document.getElementById("fromUnit").value;
@@ -476,8 +473,6 @@
         lastValue = converted;
         lastUnit = to;
       }
-
-      
 
       document.addEventListener("DOMContentLoaded", () => {
         const populateBtn = document.getElementById("populateWealth");
@@ -532,53 +527,99 @@
         let fixedShares = 0;
         const hasChildren = sons + daughters > 0;
 
-        // Husband share
-        if (aliveHusbands > 0) {
-          const totalHusbandShare = hasChildren ? estate * 0.25 : estate * 0.5;
-          const perHusbandShare = totalHusbandShare / aliveHusbands;
-          fixedShares += totalHusbandShare;
-          for (let i = 1; i <= aliveHusbands; i++) {
-            shares[`স্বামী`] = perHusbandShare; // Only one husband allowed
-          }
-        }
-
-        // Wife share
-        if (aliveWives > 0) {
-          const totalWifeShare = hasChildren ? estate * 0.125 : estate * 0.25;
-          const perWifeShare = totalWifeShare / aliveWives;
-          fixedShares += totalWifeShare;
+        // Only wife alive (no other heirs)
+        if (
+          aliveWives === 1 &&
+          aliveHusbands === 0 &&
+          sons === 0 &&
+          daughters === 0 &&
+          mother !== "yes" &&
+          father !== "yes"
+        ) {
+          shares["স্ত্রী"] = estate;
+          fixedShares = estate;
+        } else if (
+          aliveWives > 1 &&
+          aliveHusbands === 0 &&
+          sons === 0 &&
+          daughters === 0 &&
+          mother !== "yes" &&
+          father !== "yes"
+        ) {
+          const perWifeShare = estate / aliveWives;
           for (let i = 1; i <= aliveWives; i++) {
             shares[`স্ত্রী ${i}`] = perWifeShare;
           }
+          fixedShares = estate;
         }
 
-        // Mother share
-        if (mother === "yes") {
-          const motherShare = estate * 0.125;
-          shares["মা"] = motherShare;
-          fixedShares += motherShare;
-        }
+        // Only husband alive (no other heirs)
+        else if (
+          aliveHusbands === 1 &&
+          aliveWives === 0 &&
+          sons === 0 &&
+          daughters === 0 &&
+          mother !== "yes" &&
+          father !== "yes"
+        ) {
+          shares["স্বামী"] = estate;
+          fixedShares = estate;
+        } else {
+          // Multiple husbands not allowed
+          if (aliveHusbands > 1) {
+            Swal.fire({
+              icon: "error",
+              title: "ত্রুটি",
+              text: "একজনের একাধিক স্বামী থাকতে পারে না।",
+            });
+            return;
+          }
 
-        // Father share
-        if (father === "yes") {
-          const fatherShare = estate * (1 / 6); // approx 0.1667
-          shares["বাবা"] = fatherShare;
-          fixedShares += fatherShare;
-        }
+          // Husband share
+          if (aliveHusbands === 1) {
+            const husbandShare = hasChildren ? estate * 0.25 : estate * 0.5;
+            shares["স্বামী"] = husbandShare;
+            fixedShares += husbandShare;
+          }
 
-        // Remaining for children
-        const remaining = estate - fixedShares;
-        const totalUnits = sons * 2 + daughters;
+          // Wife share
+          if (aliveWives > 0) {
+            const totalWifeShare = hasChildren ? estate * 0.125 : estate * 0.25;
+            const perWifeShare = totalWifeShare / aliveWives;
+            fixedShares += totalWifeShare;
+            for (let i = 1; i <= aliveWives; i++) {
+              shares[`স্ত্রী ${i}`] = perWifeShare;
+            }
+          }
 
-        if (remaining < 0) {
-          alert("ওয়ারিশ বণ্টন অসঙ্গতিপূর্ণ। দয়া করে তথ্য পরীক্ষা করুন।");
-          return;
-        }
+          // Mother share
+          if (mother === "yes") {
+            const motherShare = estate * 0.125;
+            shares["মা"] = motherShare;
+            fixedShares += motherShare;
+          }
 
-        if (totalUnits > 0 && remaining > 0) {
-          const unitValue = remaining / totalUnits;
-          if (sons > 0) shares["ছেলে"] = unitValue * sons * 2;
-          if (daughters > 0) shares["মেয়ে"] = unitValue * daughters;
+          // Father share
+          if (father === "yes") {
+            const fatherShare = estate * (1 / 6); // approx 0.1667
+            shares["বাবা"] = fatherShare;
+            fixedShares += fatherShare;
+          }
+
+          // Remaining for children
+          const remaining = estate - fixedShares;
+          const totalUnits = sons * 2 + daughters;
+
+          if (remaining < 0) {
+            alert("ওয়ারিশ বণ্টন অসঙ্গতিপূর্ণ। দয়া করে তথ্য পরীক্ষা করুন।");
+            return;
+          }
+
+          if (totalUnits > 0 && remaining > 0) {
+            const unitValue = remaining / totalUnits;
+            if (sons > 0) shares["ছেলে"] = unitValue * sons * 2;
+            if (daughters > 0) shares["মেয়ে"] = unitValue * daughters;
+          }
         }
 
         // Output shares converted back to selected unit
@@ -668,14 +709,37 @@
             if (val > 1) {
               this.value = 1;
               Swal.fire({
-                icon: 'error',
-                title: 'ভুল ইনপুট!',
-                text: 'জীবিত স্বামীর সংখ্যা ১ এর বেশি হতে পারে না।',
-                confirmButtonText: 'ঠিক আছে'
+                icon: "error",
+                title: "ভুল ইনপুট!",
+                text: "জীবিত স্বামীর সংখ্যা ১ এর বেশি হতে পারে না।",
+                confirmButtonText: "ঠিক আছে",
               });
             }
           });
         }
+
+        const wifeInput = document.getElementById("wifeCount");
+
+        function validateSpouse() {
+          const husbandVal = parseInt(husbandInput.value || 0);
+          const wifeVal = parseInt(wifeInput.value || 0);
+
+          if (husbandVal > 0 && wifeVal > 0) {
+            Swal.fire({
+              icon: "error",
+              title: "ভুল ইনপুট",
+              text: "স্বামী এবং স্ত্রী একসাথে হতে পারে না।",
+              confirmButtonText: "ঠিক আছে",
+            });
+
+            // Reset both fields to zero to force user to choose correctly
+            husbandInput.value = 0;
+            wifeInput.value = 0;
+          }
+        }
+
+        husbandInput.addEventListener("input", validateSpouse);
+        wifeInput.addEventListener("input", validateSpouse);
       });
     </script>
   </body>
