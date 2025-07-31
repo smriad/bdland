@@ -493,18 +493,29 @@
           });
         }
       });
+
       function calculateInheritance() {
-        // Count alive husbands and wives directly
-        const aliveHusbands =
-          parseInt(document.getElementById("husbandCount").value) || 0;
-        const aliveWives =
-          parseInt(document.getElementById("wifeCount").value) || 0;
+        const aliveHusbands = Math.min(
+          parseInt(document.getElementById("husbandCount").value) || 0,
+          1
+        );
+        const aliveWives = Math.min(
+          parseInt(document.getElementById("wifeCount").value) || 0,
+          4
+        );
+
+        if (
+          (parseInt(document.getElementById("husbandCount").value) || 0) > 1
+        ) {
+          alert("একজনের একাধিক স্বামী থাকতে পারে না।");
+          return;
+        }
 
         const sons = parseInt(document.getElementById("sons").value) || 0;
         const daughters =
           parseInt(document.getElementById("daughters").value) || 0;
-        const mother = document.getElementById("mother").value;
-        const father = document.getElementById("father").value;
+        const motherAlive = document.getElementById("mother").value === "yes";
+        const fatherAlive = document.getElementById("father").value === "yes";
 
         const estateRaw = parseFloat(
           document.getElementById("estateValue").value
@@ -516,64 +527,39 @@
           return;
         }
 
-        let estate;
-        if (estateUnitValue === "taka") {
-          estate = estateRaw; // টাকা হলে সরাসরি ব্যবহার
-        } else {
-          estate = estateRaw * units[estateUnitValue]; // অন্য ইউনিট হলে রূপান্তর
-        }
+        // Convert estate to base unit (e.g., sqft equivalent)
+        let estate =
+          estateUnitValue === "taka"
+            ? estateRaw
+            : estateRaw * units[estateUnitValue];
 
-        let shares = {};
+        const shares = {};
         let fixedShares = 0;
         const hasChildren = sons + daughters > 0;
 
-        // Only wife alive (no other heirs)
-        if (
-          aliveWives === 1 &&
-          aliveHusbands === 0 &&
-          sons === 0 &&
-          daughters === 0 &&
-          mother !== "yes" &&
-          father !== "yes"
-        ) {
-          shares["স্ত্রী"] = estate;
-          fixedShares = estate;
-        } else if (
-          aliveWives > 1 &&
-          aliveHusbands === 0 &&
-          sons === 0 &&
-          daughters === 0 &&
-          mother !== "yes" &&
-          father !== "yes"
-        ) {
-          const perWifeShare = estate / aliveWives;
+        // *** Special Rule: If no children, wives alive, mother alive, father alive ***
+        if (!hasChildren && aliveWives > 0 && motherAlive && fatherAlive) {
+          // Wife total share = 1/4 divided equally
+          const wifeTotalShare = estate * 0.25;
+          const perWifeShare = wifeTotalShare / aliveWives;
           for (let i = 1; i <= aliveWives; i++) {
             shares[`স্ত্রী ${i}`] = perWifeShare;
           }
-          fixedShares = estate;
-        }
+          fixedShares += wifeTotalShare;
 
-        // Only husband alive (no other heirs)
-        else if (
-          aliveHusbands === 1 &&
-          aliveWives === 0 &&
-          sons === 0 &&
-          daughters === 0 &&
-          mother !== "yes" &&
-          father !== "yes"
-        ) {
-          shares["স্বামী"] = estate;
-          fixedShares = estate;
+          // Mother share = 1/4
+          const motherShare = estate * 0.25;
+          shares["মা"] = motherShare;
+          fixedShares += motherShare;
+
+          // Father share = 1/2
+          const fatherShare = estate * 0.5;
+          shares["বাবা"] = fatherShare;
+          fixedShares += fatherShare;
+
+          // No further shares to calculate, skip the rest
         } else {
-          // Multiple husbands not allowed
-          if (aliveHusbands > 1) {
-            Swal.fire({
-              icon: "error",
-              title: "ত্রুটি",
-              text: "একজনের একাধিক স্বামী থাকতে পারে না।",
-            });
-            return;
-          }
+          // Your existing logic for husband, wives, mother, father shares, children distribution etc.
 
           // Husband share
           if (aliveHusbands === 1) {
@@ -582,7 +568,7 @@
             fixedShares += husbandShare;
           }
 
-          // Wife share
+          // Wife shares (total share divided equally)
           if (aliveWives > 0) {
             const totalWifeShare = hasChildren ? estate * 0.125 : estate * 0.25;
             const perWifeShare = totalWifeShare / aliveWives;
@@ -592,37 +578,90 @@
             }
           }
 
-          // Mother share
-          if (mother === "yes") {
-            const motherShare = estate * 0.125;
+          // Mother share (1/6 if children else 1/3)
+          if (motherAlive) {
+            const motherShare = hasChildren
+              ? estate * (1 / 6)
+              : estate * (1 / 3);
             shares["মা"] = motherShare;
             fixedShares += motherShare;
           }
 
-          // Father share
-          if (father === "yes") {
-            const fatherShare = estate * (1 / 6); // approx 0.1667
+          // Father share (simplified 1/6)
+          if (fatherAlive) {
+            const fatherShare = estate * (1 / 6);
             shares["বাবা"] = fatherShare;
             fixedShares += fatherShare;
           }
 
-          // Remaining for children
-          const remaining = estate - fixedShares;
-          const totalUnits = sons * 2 + daughters;
-
+          // Calculate remaining estate for children (2:1 ratio sons:daughters)
+          let remaining = estate - fixedShares;
           if (remaining < 0) {
             alert("ওয়ারিশ বণ্টন অসঙ্গতিপূর্ণ। দয়া করে তথ্য পরীক্ষা করুন।");
             return;
           }
 
+          const totalUnits = sons * 2 + daughters;
           if (totalUnits > 0 && remaining > 0) {
             const unitValue = remaining / totalUnits;
             if (sons > 0) shares["ছেলে"] = unitValue * sons * 2;
             if (daughters > 0) shares["মেয়ে"] = unitValue * daughters;
+          } else if (totalUnits === 0 && remaining > 0 && fatherAlive) {
+            // If no children, father gets residual
+            shares["বাবা"] = (shares["বাবা"] || 0) + remaining;
+            remaining = 0;
           }
         }
 
-        // Output shares converted back to selected unit
+        // Now, apply Rule 19: If total distributed shares < estate,
+        // increase non-spouse shares proportionally to fill estate exactly,
+        // keeping spouse shares fixed
+
+        let totalDistributed = Object.values(shares).reduce((a, b) => a + b, 0);
+        if (totalDistributed < estate) {
+          const leftover = estate - totalDistributed;
+
+          // Calculate sum of non-spouse shares
+          const nonSpouseKeys = Object.keys(shares).filter(
+            (key) => !key.startsWith("স্বামী") && !key.startsWith("স্ত্রী")
+          );
+
+          let nonSpouseTotal = nonSpouseKeys.reduce(
+            (sum, key) => sum + shares[key],
+            0
+          );
+
+          if (nonSpouseTotal > 0) {
+            // Increase each non-spouse share proportionally
+            const scaleFactor = (nonSpouseTotal + leftover) / nonSpouseTotal;
+            nonSpouseKeys.forEach((key) => {
+              shares[key] = shares[key] * scaleFactor;
+            });
+            totalDistributed = Object.values(shares).reduce((a, b) => a + b, 0);
+          } else {
+            // No non-spouse heirs to allocate leftover
+            // Optionally assign leftover to spouse or alert
+            // Here assign to husband if present, else wives, else alert
+
+            if (aliveHusbands === 1) {
+              shares["স্বামী"] = (shares["স্বামী"] || 0) + leftover;
+              totalDistributed += leftover;
+            } else if (aliveWives > 0) {
+              const perWifeLeftover = leftover / aliveWives;
+              for (let i = 1; i <= aliveWives; i++) {
+                shares[`স্ত্রী ${i}`] =
+                  (shares[`স্ত্রী ${i}`] || 0) + perWifeLeftover;
+              }
+              totalDistributed += leftover;
+            } else {
+              alert(
+                "বন্টন শেষে কিছু অংশ বাকি রয়েছে, তবে বণ্টনের জন্য ওয়ারিশ নেই।"
+              );
+            }
+          }
+        }
+
+        // Format shares to selected unit
         const selectedUnit = estateUnitValue;
         function formatShare(val) {
           if (selectedUnit === "taka") {
@@ -631,30 +670,29 @@
             return (val / units[selectedUnit]).toFixed(4);
           }
         }
-
-        let unitLabel =
+        const unitLabel =
           selectedUnit === "taka" ? "টাকা" : unitNames[selectedUnit];
 
         // Build output
-        let output = "<h3 style=text-align:center>ওয়ারিশ বণ্টন:</h3><ul>";
-        for (const key in shares) {
-          if (key === "ছেলে" && sons > 1) {
-            const perSon = shares[key] / sons;
+        let output = `<h3 style="text-align:center;">ওয়ারিশ বণ্টন:</h3><ul>`;
+        for (const heir in shares) {
+          if (heir === "ছেলে" && sons > 1) {
+            const perSon = shares[heir] / sons;
             for (let i = 1; i <= sons; i++) {
               output += `<li>ছেলে ${i}: ${formatShare(
                 perSon
               )} ${unitLabel}</li>`;
             }
-          } else if (key === "মেয়ে" && daughters > 1) {
-            const perDaughter = shares[key] / daughters;
+          } else if (heir === "মেয়ে" && daughters > 1) {
+            const perDaughter = shares[heir] / daughters;
             for (let i = 1; i <= daughters; i++) {
               output += `<li>মেয়ে ${i}: ${formatShare(
                 perDaughter
               )} ${unitLabel}</li>`;
             }
           } else {
-            output += `<li>${key}: ${formatShare(
-              shares[key]
+            output += `<li>${heir}: ${formatShare(
+              shares[heir]
             )} ${unitLabel}</li>`;
           }
         }
