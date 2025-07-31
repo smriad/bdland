@@ -1,28 +1,59 @@
 {
-    "name": "বাংলাদেশ জমির একক রূপান্তর",
-    "short_name": "Land Converter",
-    "description": "বাংলাদেশের জমির একক রূপান্তর করুন খুব সহজে – কাঠা, শতক, বিঘা, কানী, একর ইত্যাদি।",
-    "lang": "bn",
-    "start_url": "/bdland/",
-    "display": "standalone",
-    "background_color": "#ffffff",
-    "theme_color": "#0d6efd",
-    "icons": [
-      {
-        "src": "android-chrome-192x192.png",
-        "sizes": "192x192",
-        "type": "image/png"
-      },
-      {
-        "src": "android-chrome-512x512.png",
-        "sizes": "512x512",
-        "type": "image/png"
-      },
-      {
-        "src": "apple-touch-icon.png",
-        "sizes": "180x180",
-        "type": "image/png"
-      }
-    ]
-  }
-  
+  "name": "বাংলাদেশ জমির একক রূপান্তর ও ওয়ারিশ হিসাব",
+  "short_name": "Land_Inheritance_Calculator",
+  "description": "বাংলাদেশের জমির একক রূপান্তর করুন খুব সহজে – কাঠা, শতক, বিঘা, কানি, একর, ডেসিমেল প্রভৃতি। ইসলামী আইন অনুযায়ী উত্তরাধিকার ও সম্পত্তি বন্টনের হিসাব করুন। Free Land & Inheritance Calculator BD App.",
+  "lang": "bn",
+  "start_url": "/bdland/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#0d6efd",
+  "icons": [
+    {
+      "src": "android-chrome-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "android-chrome-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    },
+    {
+      "src": "apple-touch-icon.png",
+      "sizes": "180x180",
+      "type": "image/png"
+    }
+  ],
+  "categories": [
+    "productivity",
+    "finance",
+    "tools",
+    "education"
+  ],
+  "screenshots": [
+    {
+      "src": "screenshots/converter.png",
+      "sizes": "600x800",
+      "type": "image/png"
+    },
+    {
+      "src": "screenshots/inheritance.png",
+      "sizes": "600x800",
+      "type": "image/png"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "জমি রূপান্তর",
+      "short_name": "Land Calc",
+      "description": "বাংলাদেশের জমির একক রূপান্তর করুন",
+      "url": "/bdland/#converter"
+    },
+    {
+      "name": "ওয়ারিশ হিসাব",
+      "short_name": "Inheritance",
+      "description": "ইসলামী উত্তরাধিকার হিসাব করুন",
+      "url": "/bdland/#inheritance"
+    }
+  ]
+}
