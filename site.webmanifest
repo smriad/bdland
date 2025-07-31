@@ -2,7 +2,7 @@
   "id": "/bdland/",
   "name": "বাংলাদেশ জমির একক রূপান্তর ও ওয়ারিশ হিসাব",
   "short_name": "Land_Inheritance_Calculator",
-  "description": "বাংলাদেশের জমির একক রূপান্তর করুন – কাঠা, শতক, বিঘা, কানী, একর প্রভৃতি। ইসলামী আইন অনুযায়ী উত্তরাধিকার ও সম্পত্তি বন্টনের হিসাব করুন।",
+  "description": "বাংলাদেশের জমির একক রূপান্তর করুন – কাঠা, শতক, বিঘা, কানি, একর প্রভৃতি। ইসলামী আইন অনুযায়ী উত্তরাধিকার ও সম্পত্তি বন্টনের হিসাব করুন।",
   "lang": "bn",
   "dir": "ltr",
   "start_url": "/bdland/",
@@ -46,21 +46,12 @@
       "type": "image/png"
     }
   ],
-  "shortcuts": [
-    {
-      "name": "জমি রূপান্তর",
-      "short_name": "Land Calc",
-      "description": "বাংলাদেশের জমির একক রূপান্তর করুন",
-      "url": "/bdland/#converter",
-      "icons": [{ "src": "shortcut-land.png", "sizes": "96x96", "type": "image/png" }]
-    },
-    {
-      "name": "ওয়ারিশ হিসাব",
-      "short_name": "Inheritance",
-      "description": "ইসলামী উত্তরাধিকার হিসাব করুন",
-      "url": "/bdland/#inheritance",
-      "icons": [{ "src": "shortcut-inheritance.png", "sizes": "96x96", "type": "image/png" }]
-    }
+  "categories": [
+    "productivity",
+    "finance",
+    "tools",
+    "education",
+    "utilities"
   ],
   "iarc_rating_id": "e10plus", 
   "prefer_related_applications": false,
