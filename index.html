@@ -56,8 +56,14 @@
       rel="stylesheet"
     />
     <link
+      rel="preload"
+      as="style"
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali&display=swap"
+    />
+    <link
       href="https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali&display=swap"
       rel="stylesheet"
+      media="all"
     />
 
     <style>
@@ -95,23 +101,14 @@
       body.standalone #apk-download {
         display: none;
       }
-      /* Inheritance Section Styling */
       .inheritance-section {
-        margin-top: 1rem; /* reduced from 2rem */
-        padding: 1rem 1.5rem; /* less padding */
-        border: 1px solid #0d6efd;
         background-color: #e7f1ff;
-        border-radius: 0.5rem;
-        font-size: 0.8rem; /* slightly smaller font */
+        color: #083ea3; /* darker blue */
+        padding:15px;
       }
 
       .inheritance-section h2 {
-        color: #0d6efd;
-        font-weight: 700;
-        margin-bottom: 1rem; /* reduced */
-        border-bottom: 2px solid #0d6efd;
-        padding-bottom: 0.2rem;
-        font-size: 0.8rem;
+        color: #062b75; /* even darker for heading */
       }
 
       .inheritance-section label {
@@ -177,23 +174,14 @@
         margin-top: 0px;
         margin-bottom: 0px;
       }
+      h2 {
+        color: #062b75;
+        font-size: 1.5rem;
+      }
     </style>
     <!-- Google tag (gtag.js) -->
-    <script
-      async
-      src="https://www.googletagmanager.com/gtag/js?id=G-CRRLR1C8ME"
-    ></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag() {
-        dataLayer.push(arguments);
-      }
-      gtag("js", new Date());
 
-      gtag("config", "G-CRRLR1C8ME");
-    </script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
   </head>
   <!-- SweetAlert2 CDN -->
 
@@ -368,6 +356,10 @@
           Download for Android
         </a>
       </div>
+      <p style="text-align: center; font-size: 0.9em; color: #666">
+        &copy; 2025 <a href="mailto:smriad@gmail.com">smriad@gmail.com</a>. All
+        rights reserved.
+      </p>
 
       <!-- <div id="disqus_thread" class="mt-5"></div>
       <script>
@@ -386,12 +378,10 @@
       <noscript
         >অনুগ্রহ করে Disqus মন্তব্য দেখতে জাভাস্ক্রিপ্ট চালু করুন।</noscript
       >
-    -->
-    </div>
+    --></div>
 
     <script src="script.js"></script>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <script>
       if ("serviceWorker" in navigator) {
         window.addEventListener("load", () => {
@@ -453,5 +443,23 @@
       src="//bdland.disqus.com/count.js"
       async
     ></script> -->
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
+      defer
+    ></script>
+
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-CRRLR1C8ME"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+      gtag("config", "G-CRRLR1C8ME");
+    </script>
   </body>
 </html>
