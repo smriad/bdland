@@ -311,52 +311,91 @@
             </button>
           </div>
           <div id="result" class="mt-4 text-center" style="display: none"></div>
-          <br>
+          <br />
 
-      <button
-        id="populateWealth"
-        class="btn btn-outline-success auto-populate-btn w-100"
-        style="display: none"
-      >
-        এই মানটি ওয়ারিশ হিসাবের সম্পদে বসান
-      </button>
+          <button
+            id="populateWealth"
+            class="btn btn-outline-success auto-populate-btn w-100"
+            style="display: none"
+          >
+            এই মানটি ওয়ারিশ হিসাবের সম্পদে বসান
+          </button>
         </div>
 
         <!-- Inheritance column -->
         <div class="col-md-7">
-          <div class="inheritance-section" id="inheritance-section" style="display: block">
+          <div
+            class="inheritance-section"
+            id="inheritance-section"
+            style="display: block"
+          >
             <h2>ওয়ারিশ হিসাব (ইসলামি উত্তরাধিকার)</h2>
-        
+
             <div class="row g-3">
               <div class="col-12 col-sm-6">
-                <label for="estateValue" class="form-label">মোট সম্পদ (Wealth)</label>
-                <input type="number" id="estateValue" class="form-control" placeholder="পরিমাণ দিন" style="max-width: 100%;" />
+                <label for="estateValue" class="form-label"
+                  >মোট সম্পদ (Wealth)</label
+                >
+                <input
+                  type="number"
+                  id="estateValue"
+                  class="form-control"
+                  placeholder="পরিমাণ দিন"
+                  style="max-width: 100%"
+                />
               </div>
               <div class="col-12 col-sm-6">
                 <label for="estateUnit" class="form-label">একক (Unit)</label>
-                <select id="estateUnit" class="form-select" style="max-width: 100%;"></select>
+                <select
+                  id="estateUnit"
+                  class="form-select"
+                  style="max-width: 100%"
+                ></select>
               </div>
-        
+
               <div class="col-6 col-md-4">
-                <label for="husbandCount" class="form-label">জীবিত স্বামীর সংখ্যা:</label>
-                <input type="number" id="husbandCount" min="0" max="1" value="0" class="form-control" />
+                <label for="husbandCount" class="form-label"
+                  >জীবিত স্বামীর সংখ্যা:</label
+                >
+                <input
+                  type="number"
+                  id="husbandCount"
+                  min="0"
+                  max="1"
+                  value="0"
+                  class="form-control"
+                />
               </div>
-        
+
               <div class="col-6 col-md-4">
-                <label for="wifeCount" class="form-label">জীবিত স্ত্রীর সংখ্যা:</label>
-                <input type="number" id="wifeCount" min="0" max="4" value="0" class="form-control" />
+                <label for="wifeCount" class="form-label"
+                  >জীবিত স্ত্রীর সংখ্যা:</label
+                >
+                <input
+                  type="number"
+                  id="wifeCount"
+                  min="0"
+                  max="4"
+                  value="0"
+                  class="form-control"
+                />
               </div>
-        
+
               <div class="col-6 col-md-4">
                 <label for="sons" class="form-label">ছেলের সংখ্যা:</label>
                 <input type="number" id="sons" value="0" class="form-control" />
               </div>
-        
+
               <div class="col-6 col-md-4">
                 <label for="daughters" class="form-label">মেয়ের সংখ্যা:</label>
-                <input type="number" id="daughters" value="0" class="form-control" />
+                <input
+                  type="number"
+                  id="daughters"
+                  value="0"
+                  class="form-control"
+                />
               </div>
-        
+
               <div class="col-6 col-md-4">
                 <label for="mother" class="form-label">মা বেঁচে আছেন?</label>
                 <select id="mother" class="form-select">
@@ -364,7 +403,7 @@
                   <option value="yes">হ্যাঁ</option>
                 </select>
               </div>
-        
+
               <div class="col-6 col-md-4">
                 <label for="father" class="form-label">বাবা বেঁচে আছেন?</label>
                 <select id="father" class="form-select">
@@ -373,13 +412,15 @@
                 </select>
               </div>
             </div>
-        
-            <button class="btn btn-primary w-100 mt-4" onclick="calculateInheritance()">
+
+            <button
+              class="btn btn-primary w-100 mt-4"
+              onclick="calculateInheritance()"
+            >
               ওয়ারিশ হিসাব করুন
             </button>
           </div>
         </div>
-        
       </div>
       <div class=""row">
     </div>
@@ -494,17 +535,39 @@
       defer
     ></script>
 
-    <script
-      async
-      src="https://www.googletagmanager.com/gtag/js?id=G-CRRLR1C8ME"
-    ></script>
-    <script defer>
-      window.dataLayer = window.dataLayer || [];
-      function gtag() {
-        dataLayer.push(arguments);
+    <!-- Placeholder for the GTM script -->
+    <script>
+      function loadGTM() {
+        const gtmScript = document.createElement("script");
+        gtmScript.src =
+          "https://www.googletagmanager.com/gtag/js?id=G-CRRLR1C8ME";
+        gtmScript.async = true;
+        document.head.appendChild(gtmScript);
+
+        window.dataLayer = window.dataLayer || [];
+        function gtag() {
+          dataLayer.push(arguments);
+        }
+        window.gtag = gtag;
+        gtag("js", new Date());
+        gtag("config", "G-CRRLR1C8ME");
       }
-      gtag("js", new Date());
-      gtag("config", "G-CRRLR1C8ME");
+
+      // Load GTM after user interaction or delay
+      let gtmLoaded = false;
+      function triggerGTM() {
+        if (!gtmLoaded) {
+          loadGTM();
+          gtmLoaded = true;
+        }
+      }
+
+      // Load after 5s OR on first interaction
+      window.addEventListener("scroll", triggerGTM, { once: true });
+      window.addEventListener("mousemove", triggerGTM, { once: true });
+      window.addEventListener("touchstart", triggerGTM, { once: true });
+      window.addEventListener("keydown", triggerGTM, { once: true });
+      setTimeout(triggerGTM, 5000);
     </script>
   </body>
 </html>
