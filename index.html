@@ -67,7 +67,7 @@
       rel="preload"
       as="style"
       href="https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali&display=swap"
-      onload="this.rel='stylesheet'"
+      onload="this.onload=null;this.rel='stylesheet';"
     />
     <noscript>
       <link
@@ -80,6 +80,12 @@
       body {
         background-color: #f8f9fa;
         font-family: "Noto Sans Bengali", sans-serif;
+        font-display: swap;
+      }
+      input.form-control,
+      select.form-select {
+        width: 100%;
+        max-width: 320px;
       }
       h2 {
         font-size: 1.5rem;
@@ -135,6 +141,7 @@
         background-color: #e7f1ff;
         color: #083ea3; /* darker blue */
         padding: 15px;
+        min-height: 400px; /* adjust based on content */
       }
 
       .inheritance-section h2 {
@@ -174,6 +181,7 @@
         font-weight: 600;
         box-shadow: 0 0 6px rgba(13, 110, 253, 0.15);
         font-size: 0.8rem;
+        min-height: 10px; /* ensures no jump on showing result */
       }
 
       #inheritance-result ul {
@@ -203,6 +211,9 @@
       .row > * {
         margin-top: 0px;
         margin-bottom: 0px;
+      }
+      .apk-download-wrapper {
+        min-height: 80px;
       }
     </style>
     <!-- Google tag (gtag.js) -->
@@ -372,7 +383,7 @@
         </div>
       </div>
 
-      <div class="d-flex justify-content-center my-4">
+      <div class="d-flex justify-content-center my-4 apk-download-wrapper">
         <a
           id="apk-download"
           href="Land_Inheritance_Calculator.apk"
