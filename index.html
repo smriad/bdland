@@ -80,13 +80,28 @@
         font-family: "Noto Sans Bengali", sans-serif;
       }
       h2 {
-  color: #062b75;
-  font-size: 1.5rem;
-  min-height: 2.5rem; /* reserve vertical space */
-}
+        color: #062b75;
+        font-size: 1.5rem;
+        line-height: 1.4; /* consistent line height */
+        min-height: 3rem; /* reserve vertical space */
+      }
+
+      body,
+      p,
+      label {
+        line-height: 1.5;
+      }
+      #inheritanceBarChart {
+        width: 100%;
+        max-width: 600px;
+        height: 300px; /* fixed height reserve */
+        margin: 0 auto;
+      }
+
       .container {
-        max-width: 800px;
-        margin-top: 30px;
+        max-width: 960px;
+        padding-left: 15px;
+        padding-right: 15px;
       }
       .form-label {
         font-weight: 600;
@@ -187,7 +202,6 @@
         margin-top: 0px;
         margin-bottom: 0px;
       }
-
     </style>
     <!-- Google tag (gtag.js) -->
 
