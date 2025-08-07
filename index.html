@@ -3,10 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1.0"
-    />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>
       বাংলাদেশ জমির একক রূপান্তর ও ওয়ারিশ হিসাব | Bangladesh Land Area Unit
       Converter & Islamic Inheritance Calculator
@@ -109,8 +106,8 @@
     <style>
       body {
         background-color: #f8f9fa;
-        font-family: "Noto Sans Bengali", "Segoe UI", Tahoma, Geneva,
-          Verdana, sans-serif;
+        font-family: "Noto Sans Bengali", "Segoe UI", Tahoma, Geneva, Verdana,
+          sans-serif;
         color: #222; /* improved contrast */
         font-display: swap;
         margin: 0;
@@ -228,8 +225,7 @@
         padding: 0.3rem 0;
         border-bottom: 1px solid #cfe2ff;
         font-size: 0.8rem;
-        text-align: right;
-        max-width: 300px;
+        text-align: center;
       }
 
       #inheritance-result li:last-child {
@@ -246,16 +242,25 @@
         margin-top: 0px;
         margin-bottom: 0px;
       }
-      .apk-download-wrapper {
-        min-height: 80px;
+
+      /* Reserve space for inheritance result to avoid shifts */
+      #inheritance-result {
+        min-height: 30px; /* Enough for result list */
+        transition: opacity 0.3s ease;
+      }
+
+      /* Add a small margin between columns to avoid shift */
+      .col-md-5,
+      .col-md-7 {
+        margin-bottom: 0;
+      }
+      .container.bg-white.p-4.shadow-sm.rounded {
+        min-height: 600px; /* adjust based on expected content height */
       }
     </style>
     <!-- Google tag (gtag.js) -->
 
-    <script
-      src="https://cdn.jsdelivr.net/npm/sweetalert2@11"
-      defer
-    ></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11" defer></script>
   </head>
   <!-- SweetAlert2 CDN -->
 
@@ -303,17 +308,17 @@
             <button class="btn btn-primary w-100" onclick="convert()">
               রূপান্তর করুন (Convert)
             </button>
-
-            <div id="result" class="mt-4 text-center"></div>
-
-            <button
-              id="populateWealth"
-              class="btn btn-outline-success auto-populate-btn w-100"
-              style="display: none"
-            >
-              এই মানটি ওয়ারিশ হিসাবের সম্পদে বসান
-            </button>
           </div>
+          <div id="result" class="mt-4 text-center" style="display: none"></div>
+          <br>
+
+      <button
+        id="populateWealth"
+        class="btn btn-outline-success auto-populate-btn w-100"
+        style="display: none"
+      >
+        এই মানটি ওয়ারিশ হিসাবের সম্পদে বসান
+      </button>
         </div>
 
         <!-- Inheritance column -->
@@ -410,32 +415,35 @@
             >
               ওয়ারিশ হিসাব করুন
             </button>
-
-            <div
-              class="result"
-              id="inheritance-result"
-              style="margin-top: 1.5rem"
-            ></div>
           </div>
         </div>
       </div>
+      <div class=""row">
+    </div>
+    <div class="row">
+      <div
+        class="result"
+        id="inheritance-result"
+        style="margin-top: 1.5rem; display: none"
+      ></div>
+    </div>
 
-      <div class="d-flex justify-content-center my-4 apk-download-wrapper">
-        <a
-          id="apk-download"
-          href="Land_Inheritance_Calculator.apk"
-          download
-          class="btn btn-danger btn-lg d-inline-flex align-items-center px-4 py-2"
-        >
-          Download for Android
-        </a>
-      </div>
-      <p style="text-align: center; font-size: 0.9em; color: #666">
-        &copy; 2025 <a href="mailto:smriad@gmail.com">smriad@gmail.com</a>. All
-        rights reserved.
-      </p>
+    <div class="d-flex justify-content-center my-4 apk-download-wrapper">
+      <a
+        id="apk-download"
+        href="Land_Inheritance_Calculator.apk"
+        download
+        class="btn btn-danger btn-lg d-inline-flex align-items-center px-4 py-2"
+      >
+        Download for Android
+      </a>
+    </div>
+    <p style="text-align: center; font-size: 0.9em; color: #666">
+      &copy; 2025 <a href="mailto:smriad@gmail.com">smriad@gmail.com</a>. All
+      rights reserved.
+    </p>
 
-      <!-- <div id="disqus_thread" class="mt-5"></div>
+    <!-- <div id="disqus_thread" class="mt-5"></div>
       <script>
         var disqus_config = function () {
           this.page.url = window.location.href;
@@ -452,7 +460,7 @@
       <noscript
         >অনুগ্রহ করে Disqus মন্তব্য দেখতে জাভাস্ক্রিপ্ট চালু করুন।</noscript
       >
-    --></div>
+    -->
 
     <script src="script.js" defer></script>
 
