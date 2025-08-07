@@ -67,12 +67,14 @@
       rel="preload"
       as="style"
       href="https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali&display=swap"
+      onload="this.rel='stylesheet'"
     />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali&display=swap"
-      rel="stylesheet"
-      media="all"
-    />
+    <noscript>
+      <link
+        href="https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali&display=swap"
+        rel="stylesheet"
+      />
+    </noscript>
 
     <style>
       body {
@@ -80,10 +82,11 @@
         font-family: "Noto Sans Bengali", sans-serif;
       }
       h2 {
-        color: #062b75;
         font-size: 1.5rem;
-        line-height: 1.4; /* consistent line height */
-        min-height: 3rem; /* reserve vertical space */
+        line-height: 1.4;
+        min-height: 3rem; /* Reserve vertical space to match typical 2 line height */
+        margin-top: 0;
+        margin-bottom: 0.5rem;
       }
 
       body,
@@ -94,14 +97,13 @@
       #inheritanceBarChart {
         width: 100%;
         max-width: 600px;
-        height: 300px; /* fixed height reserve */
+        height: 300px; /* Reserve enough space */
         margin: 0 auto;
       }
 
       .container {
         max-width: 960px;
-        padding-left: 15px;
-        padding-right: 15px;
+        padding: 0 15px;
       }
       .form-label {
         font-weight: 600;
