@@ -3,7 +3,10 @@
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0"
+    />
     <title>
       বাংলাদেশ জমির একক রূপান্তর ও ওয়ারিশ হিসাব | Bangladesh Land Area Unit
       Converter & Islamic Inheritance Calculator
@@ -32,6 +35,13 @@
       property="og:description"
       content="বাংলাদেশে ব্যবহৃত জমির একক সহজে রূপান্তর করুন এবং ফরায়েজ আইন অনুযায়ী ইসলামী শরিয়াহ ভিত্তিক ওয়ারিশ হিসাব করুন। সম্পত্তি বণ্টন ও জমি পরিমাপের জন্য সম্পূর্ণ ক্যালকুলেটর।"
     />
+    <meta
+      property="og:image"
+      content="https://smriad.github.io/bdland/og-image.png"
+    />
+    <!-- Specify width and height for OG image to reserve space -->
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
 
     <meta name="author" content="SM Riad" />
     <meta name="robots" content="index, follow" />
@@ -40,10 +50,6 @@
 
     <meta property="og:url" content="https://smriad.github.io/bdland/" />
     <meta property="og:type" content="website" />
-    <meta
-      property="og:image"
-      content="https://smriad.github.io/bdland/og-image.png"
-    />
 
     <link rel="icon" type="image/x-icon" href="favicon.ico" />
     <link rel="icon" sizes="32x32" href="favicon-32x32.png" />
@@ -51,6 +57,12 @@
     <link rel="apple-touch-icon" href="apple-touch-icon.png" />
     <link rel="manifest" href="site.webmanifest" />
 
+    <!-- Preload key CSS and font to reduce CLS -->
+    <link
+      rel="preload"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      as="style"
+    />
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
       rel="stylesheet"
@@ -63,15 +75,33 @@
         rel="stylesheet"
       />
     </noscript>
+
+    <!-- Preload Google Fonts with font-display swap -->
     <link
       rel="preload"
       as="style"
       href="https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali&display=swap"
-      onload="this.onload=null;this.rel='stylesheet';"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Preload SweetAlert2 for faster alert rendering -->
+    <link
+      rel="preload"
+      href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css"
+      as="style"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css"
+      rel="stylesheet"
+      media="print"
+      onload="this.media='all'"
     />
     <noscript>
       <link
-        href="https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali&display=swap"
+        href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css"
         rel="stylesheet"
       />
     </noscript>
@@ -79,8 +109,12 @@
     <style>
       body {
         background-color: #f8f9fa;
-        font-family: "Noto Sans Bengali", sans-serif;
+        font-family: "Noto Sans Bengali", "Segoe UI", Tahoma, Geneva,
+          Verdana, sans-serif;
+        color: #222; /* improved contrast */
         font-display: swap;
+        margin: 0;
+        padding: 0;
       }
       input.form-control,
       select.form-select {
@@ -90,9 +124,9 @@
       h2 {
         font-size: 1.5rem;
         line-height: 1.4;
-        min-height: 3rem; /* Reserve vertical space to match typical 2 line height */
         margin-top: 0;
         margin-bottom: 0.5rem;
+        min-height: 60px;
       }
 
       body,
@@ -218,7 +252,10 @@
     </style>
     <!-- Google tag (gtag.js) -->
 
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11" defer></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/sweetalert2@11"
+      defer
+    ></script>
   </head>
   <!-- SweetAlert2 CDN -->
 
